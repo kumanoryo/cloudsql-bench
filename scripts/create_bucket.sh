@@ -4,24 +4,16 @@
 set -u
 
 SCRIPTS_DIR=$(cd "$(dirname "$0")" && pwd)
-
-# shellcheck source=./common.conf
-. "${SCRIPTS_DIR}/conf/common.conf"
-# shellcheck source=./echo_custom.sh
-. "${SCRIPTS_DIR}/function/echo_custom.sh"
-# shellcheck source=./set_service_account.sh
-. "${SCRIPTS_DIR}/function/service_account.sh"
+# shellcheck source=./initializing.sh
+. "${SCRIPTS_DIR}/function/initializing.sh"
 
 echo_begin_script
 
-echo_info "# Set service account."
-set_service_account || { echo_abort; exit 1; }
-
 echo_info "# Check is bucket exists?"
-is_bucket_exists=$(gsutil ls | grep -c "gs://${BUCKET_NAME}") || { echo_abort; exit 1; }
+is_bucket_exists=$(gsutil ls | grep -c "gs://${BUCKET_NAME}")
 if [ "${is_bucket_exists}" -eq 0 ]; then
   echo_info "# Create bucket gs://${BUCKET_NAME}."
-  run gsutil mb -c "${BUCKET_CLASS}" -l "${BUCKET_LOCATION}" -p "${PROJECT_ID}" "gs://${BUCKET_NAME}" || { echo_abort; exit 1; } 
+  run gsutil mb -c "${BUCKET_CLASS}" -l "${BUCKET_LOCATION}" "gs://${BUCKET_NAME}" || { echo_abort; exit 1; } 
 else
   echo_info "# Bucket gs://${BUCKET_NAME} is already exists."
 fi
