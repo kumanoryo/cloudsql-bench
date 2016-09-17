@@ -13,17 +13,9 @@ data "terraform_remote_state" "default" {
     backend = "gcs"
     config {
         bucket = "${var.bucket_name}"
-        path = "/opt/network/terraform.tfstate"
+        path = "/opt/terraform-template/terraform.tfstate"
         project = "${var.project_id}"
     }
-}
-
-resource "template_file" "default" {
-  template = "${greeting}"
-
-  vars {
-    greeting = "${data.terraform_remote_state.default.output.greeting}"
-  }
 }
 
 resource "google_compute_network" "default" {
