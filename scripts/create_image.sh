@@ -25,13 +25,13 @@ echo_info "# Create image."
 packer_cmd="docker run -i -t \
 -v ${PACKER_DIR}/:/opt/ \
 -e PK_VAR_source_image=${source_image} \
--e PK_VAR_project_id=${IMAGE_PROJECT_ID} \
--e PK_VAR_network=${IMAGE_NETWORK} \
--e PK_VAR_zone=${IMAGE_ZONE} \
--e PK_VAR_ssh_username=${IMAGE_SSH_USERNAME} \
+-e PK_VAR_project_id=${PROJECT_ID} \
+-e PK_VAR_network=${NETWORK} \
+-e PK_VAR_zone=${ZONE} \
+-e PK_VAR_ssh_username=${PACKER_SSH_USERNAME} \
 -e PK_VAR_image_name=${IMAGE_NAME} \
--e PK_VAR_cloudsql_instance_name=${IMAGE_CLOUDSQL_INSTANCE_NAME} \
--e PK_VAR_bucket_name=${IMAGE_BUCKET_NAME} \
+-e PK_VAR_cloudsql_instance_name=${CLOUDSQL_INSTANCE_NAME} \
+-e PK_VAR_bucket_name=${BUCKET_NAME} \
 hashicorp/packer:light \
 build /opt/packer-template.json"
 
