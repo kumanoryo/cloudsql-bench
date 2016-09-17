@@ -28,11 +28,11 @@ eval "${terraform_cmd}" || { echo_abort; exit 1; }
 echo_info "# Create network."
 terraform_cmd="docker run -i -t \
 -v ${TERRAFORM_DIR}/:/opt/ \
+-v ${CLOUDSDK_CONFIG}/application_default_credentials.json:/tmp/application_default_credentials.json \
 -e TF_VAR_project_id=${PROJECT_ID} \
 -e TF_VAR_region=${REGION} \
 -e TF_VAR_bucket_name=${BUCKET_NAME} \
 -e TF_VAR_network_name=${NETWORK} \
--e TF_VAR_credentials=${CLOUDSDK_CONFIG}/application_default_credentials.json \
 hashicorp/terraform:light \
 apply /opt/terraform-template/"
 

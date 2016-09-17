@@ -5,7 +5,7 @@ variable "bucket_name" {}
 variable "network_name" {}
 
 provider "google" {
-  credentials = "${file("${var.credentials}")}"
+  credentials = "${file("/tmp/application_default_credentials.json")}"
   project     = "${var.project_id}"
   region      = "${var.region}"
 }
