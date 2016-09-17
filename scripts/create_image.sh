@@ -4,20 +4,14 @@
 set -u
 
 SCRIPTS_DIR=$(cd "$(dirname "$0")" && pwd)
+# shellcheck source=./initializing.sh
+. "${SCRIPTS_DIR}/function/initializing.sh"
+
 HOME_DIR=$(cd "$(dirname "$0")"/..;pwd) || exit 1
 PACKER_DIR="${HOME_DIR}/packer/sysbench-client"
 
-# shellcheck source=./common.conf
-. "${SCRIPTS_DIR}/conf/common.conf"
-# shellcheck source=./echo_custom.sh
-. "${SCRIPTS_DIR}/function/echo_custom.sh"
-# shellcheck source=./set_service_account.sh
-. "${SCRIPTS_DIR}/function/service_account.sh"
-
 echo_begin_script
 
-echo_info "# Set service account."
-set_service_account || { echo_abort; exit 1; }
 echo_info "# Get source image."
 source_image="$(gcloud compute images list --project="${PROJECT_ID}" --format='table[no-heading](name)' --filter family='centos-7')" || { echo_abort; exit 1; }
 
@@ -33,7 +27,6 @@ run export PK_VAR_project_id="${IMAGE_PROJECT_ID}" || { echo_abort; exit 1; }
 run export PK_VAR_network="${IMAGE_NETWORK}" || { echo_abort; exit 1; }
 run export PK_VAR_zone="${IMAGE_ZONE}" || { echo_abort; exit 1; }
 run export PK_VAR_ssh_username="${IMAGE_SSH_USERNAME}" || { echo_abort; exit 1; }
-run export PK_VAR_account_file="${IMAGE_ACCOUNT_FILE}" || { echo_abort; exit 1; }
 run export PK_VAR_image_name="${IMAGE_NAME}" || { echo_abort; exit 1; }
 run export PK_VAR_cloudsql_instance_name="${IMAGE_CLOUDSQL_INSTANCE_NAME}" || { echo_abort; exit 1; }
 run export PK_VAR_packer_dir="${PACKER_DIR}" || { echo_abort; exit 1; }
