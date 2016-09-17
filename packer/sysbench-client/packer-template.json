@@ -1,6 +1,5 @@
 {
   "variables": {
-      "account_file": "{{env `PK_VAR_account_file`}}"
       ,"project_id": "{{env `PK_VAR_project_id`}}"
       ,"source_image": "{{env `PK_VAR_source_image`}}"
       ,"network": "{{env `PK_VAR_network`}}"
@@ -14,7 +13,6 @@
   ,"builders": [
     {
       "type": "googlecompute"
-      ,"account_file": "{{user `account_file`}}"
       ,"project_id": "{{user `project_id`}}"
       ,"source_image": "{{user `source_image`}}"
       ,"network": "{{user `network`}}"
@@ -39,12 +37,12 @@
     }
     ,{
       "type": "file"
-      ,"source": "{{user `packer_dir`}}/ansible-local"
+      ,"source": "/opt/ansible-local"
       ,"destination": "/tmp"
     }
     ,{
       "type": "ansible-local"
-      ,"playbook_file": "{{user `packer_dir`}}/ansible-local/site.yml"
+      ,"playbook_file": "/opt/ansible-local/site.yml"
       ,"staging_directory": "/tmp/ansible-local"
       ,"extra_arguments": [ "--extra-vars \"cloudsql_instance_name={{user `cloudsql_instance_name`}} project_id={{user `project_id`}} bucket_name={{user `bucket_name`}}\"" ]
     }
