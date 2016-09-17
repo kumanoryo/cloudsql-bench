@@ -1,0 +1,14 @@
+[Unit]
+Description = CloudSQL Proxy %i
+After = network.target
+
+[Service]
+EnvironmentFile = /srv/cloud_sql_proxy/%i.conf
+ExecStart = /usr/bin/cloud_sql_proxy -instances=${PROJECT_ID}:${REGION}:${INSTANCE_NAME}=tcp:${PORT}
+ExecStop = /bin/kill ${MAINPID}
+ExecReload = /bin/kill -HUP ${MAINPID}
+Restart = always
+Type = simple
+
+[Install]
+WantedBy = multi-user.target
