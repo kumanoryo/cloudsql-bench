@@ -1,6 +1,6 @@
 {
   "variables": {
-      ,"project_id": "{{env `PK_VAR_project_id`}}"
+      "project_id": "{{env `PK_VAR_project_id`}}"
       ,"source_image": "{{env `PK_VAR_source_image`}}"
       ,"network": "{{env `PK_VAR_network`}}"
       ,"zone": "{{env `PK_VAR_zone`}}"
