@@ -32,6 +32,7 @@ terraform_cmd="docker run -i -t \
 -e TF_VAR_region=${REGION} \
 -e TF_VAR_bucket_name=${BUCKET_NAME} \
 -e TF_VAR_network_name=${NETWORK} \
+-e TF_vAR_credentials=${CLOUDSDK_CONFIG}/application_default_credentials.json \
 hashicorp/terraform:light \
 apply /opt/terraform-template/"
 

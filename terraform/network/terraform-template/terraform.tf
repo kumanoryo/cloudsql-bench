@@ -1,9 +1,11 @@
+variable "credentials" {}
 variable "project_id" {}
 variable "region" {}
 variable "bucket_name" {}
 variable "network_name" {}
 
 provider "google" {
+  credentials = "${file("${var.credentials}")}"
   project     = "${var.project_id}"
   region      = "${var.region}"
 }
