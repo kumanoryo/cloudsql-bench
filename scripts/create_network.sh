@@ -6,6 +6,8 @@ set -u
 SCRIPTS_DIR=$(cd "$(dirname "$0")" && pwd)
 # shellcheck source=./initializing.sh
 . "${SCRIPTS_DIR}/function/initializing.sh"
+
+HOME_DIR=$(cd "$(dirname "$0")"/..;pwd) || exit 1
 TERRAFORM_DIR="${HOME_DIR}/terraform/network"
 
 echo_begin_script
