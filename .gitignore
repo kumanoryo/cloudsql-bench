@@ -1,4 +1,2 @@
 terraform/*/terraform-template/terraform.tfstate
 terraform/*/terraform-template/terraform.tfstate.backup
-scripts/conf/common.conf
-scripts/conf/common.conf*
