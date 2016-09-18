@@ -13,7 +13,7 @@ DM_DIR="${HOME_DIR}/deployment-manager"
 echo_begin_script
 
 echo_info "# Create network."
-run gcloud deployment-manager deployments create "${NETWORK_NAME}" --config "${DM_DIR}"/network.yml || exit 1
+run gcloud deployment-manager deployments create "${NETWORK}" --config "${DM_DIR}"/network.yml || exit 1
 
 echo_end_script
 
