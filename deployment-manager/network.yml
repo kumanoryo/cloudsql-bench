@@ -1,6 +1,0 @@
-imports:
-- path: network.py
-
-resources:
-- name: network 
-  type: network.py

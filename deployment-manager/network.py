@@ -1,6 +1,7 @@
-def GenerateConfig(unused_context):
+def GenerateConfig(context):
+
   resources = [{
-      'name': context.env['name'],
+      'name': context.env['deployment'],
       'type': 'compute.v1.network',
       'properties': {
           'autoCreateSubnetworks': True
