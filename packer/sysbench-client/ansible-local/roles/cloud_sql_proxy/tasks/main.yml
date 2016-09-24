@@ -1,5 +1,7 @@
 - get_url: url=https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 dest=/usr/bin/cloud_sql_proxy mode=755
 - copy: src=etc/systemd/system/cloud_sql_proxy@.service dest=/etc/systemd/system/cloud_sql_proxy@.service
+- file: path=/etc/systemd/system/cloud_sql_proxy@.service.d state=directory mode=0755
+- copy: src=etc/systemd/system/cloud_sql_proxy@.service.d/limits.conf dest=/etc/systemd/system/cloud_sql_proxy@.service.d/limits.conf
 - file: path=/srv/cloud_sql_proxy state=directory mode=0755
 - template: src=srv/cloud_sql_proxy/instance.conf.j2 dest=/srv/cloud_sql_proxy/{{ cloudsql_instance_name }}.conf
 - service: name=cloud_sql_proxy@{{ cloudsql_instance_name }}.service state=started enabled=yes
