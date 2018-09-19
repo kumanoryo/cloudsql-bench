@@ -9,14 +9,11 @@ SCRIPTS_DIR=$(cd "$(dirname "$0")" && pwd)
 
 echo_begin_script
 
-echo_info "# Check is bucket exists?"
-is_bucket_exists=$(gsutil ls | grep -c "gs://${BUCKET_NAME}")
-if [ "${is_bucket_exists}" -eq 0 ]; then
-  echo_info "# Create bucket gs://${BUCKET_NAME}."
-  run gsutil mb -c "${BUCKET_CLASS}" -l "${REGION}" "gs://${BUCKET_NAME}" || { echo_abort; exit 1; } 
-else
-  echo_info "# Bucket gs://${BUCKET_NAME} is already exists."
-fi
+run gcloud deployment-manager deployments create "${BUCKET_NAME}" \
+--config deployment-manager/bucket.py \
+--properties \
+location="${REGION}", \
+storageClass="${BUCKET_CLASS}"
 
 echo_end_script
 
